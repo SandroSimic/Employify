@@ -1,0 +1,112 @@
+.allJobs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    border-bottom: 2px solid var(--secondary-color);
+    padding: 5rem;
+    &__form {
+      display: flex;
+      gap: 3rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      &__input {
+        display: flex;
+        align-items: center;
+        position: relative;
+        & input {
+          border-radius: 1rem;
+          box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
+          border: 1px solid var(--color-grey);
+          height: 5rem;
+          font-size: 1.6rem;
+          padding: 1rem 4rem;
+          width: 30rem;
+          outline: none;
+          &:focus {
+            border: 1px solid var(--primary-color);
+          }
+        }
+
+        &--icon {
+          position: absolute;
+          font-size: 2rem;
+          left: 1rem;
+          top: 1.5rem;
+          color: var(--primary-color);
+        }
+      }
+
+      &__btn {
+        background-color: var(--secondary-color);
+        border: none;
+        align-self: center;
+        padding: 1.5rem 3rem;
+        border: 1px solid var(--primary-color);
+        border-radius: 1rem;
+        font-size: 1.7rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        transition: 0.5s all;
+        box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
+
+        &:hover {
+          background-color: var(--primary-color);
+          color: white;
+
+          cursor: pointer;
+        }
+      }
+    }
+
+    & select {
+      font-size: 1.4rem;
+      padding: 0.675em 1em 0.675em 0.5em;
+      background-color: var(--secondary-color);
+      border: 1px solid #caced1;
+      border-radius: 0.5rem;
+      color: #000;
+      cursor: pointer;
+    }
+
+    &__filters {
+      display: flex;
+      gap: 3rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  }
+
+  &__main {
+    padding: 5rem;
+    display: grid;
+    place-items: center;
+    justify-content: space-between;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(25rem, 1fr));
+    gap: 2rem;
+    height: 100%;
+
+    @media only screen and (max-width: $bp-large) {
+      grid-template-columns: repeat(2, minmax(25rem, 50rem));
+      justify-content: center;
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-columns: repeat(1, minmax(25rem, 50rem));
+      justify-content: center;
+    }
+  }
+}

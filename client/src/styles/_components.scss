@@ -1,0 +1,179 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & button {
+    padding: 1.5rem 3rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+    background-color: var(--color-white);
+    outline: none;
+    border: 1px solid var(--primary-color);
+    border-radius: 0.5rem;
+    transition: 0.5s all;
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--color-white);
+      cursor: pointer;
+    }
+  }
+
+  @media only screen and (max-width: $bp-large) {
+    flex-direction: column;
+    gap: 5rem;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    & h1 {
+      font-size: 5rem;
+
+      & span {
+        position: relative;
+        z-index: 10;
+      }
+
+      & span::after {
+        content: "";
+        width: 100%;
+        height: 1rem;
+        z-index: -1;
+        background-color: #ffdcc7;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      @media only screen and (max-width: $bp-medium) {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+    }
+
+    & p {
+      font-size: 2rem;
+    }
+  }
+}
+
+// Job Card
+
+.job {
+  &__info {
+    background-color: var(--color-white);
+    border-radius: 0.5rem;
+    padding: 4rem;
+    box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
+    border: 2px solid var(--secondary-color);
+
+    &__job {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2.5rem;
+
+      &__info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      &__location {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+
+        &__text {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          & h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+          }
+
+          & span {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+            font-size: 1.3rem;
+
+            .span__icon {
+              color: var(--primary-color);
+            }
+          }
+        }
+
+        & img {
+          width: 5rem;
+          height: 5rem;
+          border-radius: 10rem;
+        }
+      }
+
+      &__salary {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        & span {
+          font-size: 1.7rem;
+          font-weight: bold;
+        }
+
+        & p {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    &__text {
+      & h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-black);
+      }
+
+      & span {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--color-grey-light);
+      }
+
+      & p {
+        font-size: 1.6rem;
+        color: var(--color-grey-light);
+
+        margin: 2rem 0rem;
+      }
+    }
+
+    &__apply {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      & button {
+        padding: 1.5rem 3rem;
+        background-color: var(--secondary-color);
+        border: none;
+        outline: none;
+        color: var(--primary-color);
+        font-size: 1.6rem;
+        font-weight: bold;
+        border-radius: 1rem;
+        transition: 0.2s all;
+        &:hover {
+          color: var(--color-white);
+          background-color: var(--primary-color);
+          cursor: pointer;
+        }
+      }
+
+      & p {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
