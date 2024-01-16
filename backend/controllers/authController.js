@@ -3,16 +3,26 @@ import User from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
 import generateToken from "../utils/generateToken.js";
+import { s3Upload } from "../utils/s3Service.js";
 
 const register = catchAsync(async (req, res, next) => {
   const { username, email, password } = req.body;
 
-  const newUser = await User.create({
+  if (!req.file || !req.file.buffer) {
+    return next(new AppError("Please provide a profile image", 400));
+  }
+
+  const data = await s3Upload(req.file);
+  console.log(data);
+  const user = await User.create({
     username,
     email,
     password,
+    userImage: data.Location,
   });
 
+  const newUser = await user.save();
+  generateToken(res, newUser._id);
   res.status(200).json({ newUser });
 });
 

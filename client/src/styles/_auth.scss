@@ -1,0 +1,78 @@
+.login {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100vh;
+
+  &__mainForm {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+    align-items: center;
+
+    & h1 {
+      font-size: 4rem;
+      color: var(--primary-color);
+    }
+
+    &__text {
+      height: 100%;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+
+      & h2 {
+        font-size: 3rem;
+        color: var(--primary-color);
+      }
+
+      & p {
+        font-size: 1.6rem;
+        color: var(--color-black);
+      }
+
+      & button {
+        padding: 1.5rem;
+        border-radius: 1.2rem;
+        outline: none;
+        border: none;
+        background-color: var(--primary-color);
+        color: var(--color-white);
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: 0.2s all;
+
+        &:hover {
+          background-color: var(--primary-color-light);
+        }
+      }
+    }
+
+    &__inputs {
+      margin: 5rem 0rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      & input {
+        height: 3.5rem;
+        min-width: 30rem;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        border: 1px solid var(--primary-color-light);
+        outline: none;
+        &:focus {
+          border: 2px solid var(--primary-color);
+        }
+      }
+    }
+  }
+
+  &__image {
+    display: flex;
+    background: url("./../images/loginImage.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}

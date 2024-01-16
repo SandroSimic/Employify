@@ -5,10 +5,21 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import AllJobsPage from "./pages/AllJobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  },
+});
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -20,7 +31,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
-    </>
+    </QueryClientProvider>
   );
 }
 

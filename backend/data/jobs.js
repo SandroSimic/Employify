@@ -5,7 +5,7 @@ export const jobs = [
     location: "San Francisco, CA",
     salary: 100000,
     salaryType: "yearly",
-    jobType: "full-time",
+    jobType: "Full-Time",
     description:
       "Join our dynamic team of software engineers and contribute to cutting-edge projects.",
     category: "Design & Development",
@@ -17,7 +17,7 @@ export const jobs = [
     location: "New York, NY",
     salary: 5000,
     salaryType: "monthly",
-    jobType: "full-time",
+    jobType: "Full-Time",
     description:
       "Exciting opportunity to shape marketing strategies and campaigns for global brands.",
     category: "Marketing & Communication",
@@ -29,7 +29,7 @@ export const jobs = [
     location: "Los Angeles, CA",
     salary: 80000,
     salaryType: "yearly",
-    jobType: "part-time",
+    jobType: "Full-Time",
     description: "Provide compassionate healthcare services to our community.",
     category: "Healthcare",
     applicants: 3,
@@ -40,7 +40,7 @@ export const jobs = [
     location: "Chicago, IL",
     salary: 90000,
     salaryType: "yearly",
-    jobType: "full-time",
+    jobType: "Full-Time",
     description:
       "Analyzing financial data and providing insights for strategic decision-making.",
     category: "Finance Management",
@@ -52,7 +52,7 @@ export const jobs = [
     location: "Boston, MA",
     salary: 60000,
     salaryType: "yearly",
-    jobType: "full-time",
+    jobType: "Full-Time",
     description:
       "Inspire and educate students in a dynamic learning environment.",
     category: "Education",

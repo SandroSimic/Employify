@@ -2,22 +2,23 @@
 import JobsCard from "./JobsCard";
 
 const Jobs = ({ jobs }) => {
+console.log(jobs)
+
   return (
     <>
       {jobs.map((job, index) => (
         <JobsCard
           key={index}
-          id={job.id}
-          image={job.image}
-          CompanyName={job.CompanyName}
+          id={job._id}
+          CompanyName={job.CompanyName || "Company Name"}
           position={job.position}
           location={job.location}
           salary={job.salary}
           monthly={job.monthly}
           fullTime={job.fullTime}
-          dateOfPost={job.dateOfPost}
+          dateOfPost={job.createdAt}
           description={job.description}
-          applied={job.applied}
+          applied={job.applicants}
         />
       ))}
     </>
