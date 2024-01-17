@@ -1,15 +1,16 @@
 export const jobs = [
   {
-    companyName: "Tech Innovators",
-    position: "Software Engineer",
-    location: "San Francisco, CA",
-    salary: 100000,
+    companyId: "65a72b52054fb3767390076c",
+    userId: "65a72aecaf7f1820a44ce460",
+    position: "Senior Flutter Developer",
+    location: "Los Vegas",
+    salary: 120000,
     salaryType: "yearly",
     jobType: "Full-Time",
     description:
-      "Join our dynamic team of software engineers and contribute to cutting-edge projects.",
+      "We are looking for a Senior Web developer with 5+ year of experience in Flutter",
     category: "Design & Development",
-    applicants: 5,
+    applicants: 0,
   },
   {
     companyName: "Marketing Masters",

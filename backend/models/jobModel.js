@@ -2,9 +2,13 @@ import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema(
   {
-    companyName: {
-      type: String,
-      required: true,
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     position: {
       type: String,
@@ -51,8 +55,8 @@ const jobSchema = new mongoose.Schema(
     },
     applicants: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   {
     timestamps: true,

@@ -2,27 +2,39 @@ import mongoose from "mongoose";
 import Job from "../models/jobModel.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
+import Company from "../models/companyModel.js";
 
 const createJob = catchAsync(async (req, res, next) => {
   const {
-    companyName,
     position,
     location,
     salary,
-    monthly,
-    fullTime,
+    salaryType,
+    jobType,
     description,
+    category,
   } = req.body;
 
+  const userId = req.user._id;
+  const companyId = req.user.companyId;
+
   const newJob = await Job.create({
-    companyName,
+    companyId,
+    userId,
     position,
     location,
     salary: parseInt(salary),
-    monthly: Boolean(monthly),
-    fullTime: Boolean(fullTime),
+    salaryType,
+    jobType,
     description,
+    category,
   });
+
+  await Company.findByIdAndUpdate(
+    companyId,
+    { $push: { jobs: newJob._id } },
+    { new: true }
+  );
 
   res.status(200).json({ newJob });
 });
@@ -109,4 +121,10 @@ const deleteJob = catchAsync(async (req, res, next) => {
   }
 });
 
-export { getJobs, getJobById, updateJob, deleteJob, createJob };
+const getTopJobs = catchAsync(async (req, res, next) => {
+  const topJobs = await Job.find({}).sort({ applicants: -1 }).limit(6).populate("companyId");
+
+  res.status(200).json({ topJobs });
+});
+
+export { getJobs, getJobById, updateJob, deleteJob, createJob, getTopJobs };

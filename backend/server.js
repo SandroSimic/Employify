@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import jobRouter from "./routes/jobRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import companyRouter from "./routes/companyRoutes.js";
 import connectDB from "./config/db.js";
 import globalErrorHandler from "./controllers/errorController.js";
 import cookieParser from "cookie-parser";
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/jobs", jobRouter);
 app.use("/api/users", userRouter);
+app.use("/api/companies", companyRouter);
 
 app.get("/", (req, res) => {
   res.send("Getting Api");

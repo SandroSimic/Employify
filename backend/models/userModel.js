@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     enum: ["employee", "employer", "admin"],
     default: "employee",
   },
+  companyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Company",
+  },
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
