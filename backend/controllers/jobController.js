@@ -40,7 +40,7 @@ const createJob = catchAsync(async (req, res, next) => {
 });
 
 const getJobs = catchAsync(async (req, res, next) => {
-  const jobs = await Job.find();
+  const jobs = await Job.find().populate('companyId', '-jobs');
 
   if (jobs.length === 0 || !jobs) {
     return res.status(404).json({ message: "No job found" });
@@ -51,7 +51,7 @@ const getJobs = catchAsync(async (req, res, next) => {
 
 const getJobById = async (req, res) => {
   const { id } = req.params;
-  const job = await Job.findById(id);
+  const job = await Job.findById(id).populate("companyId");
 
   if (!job) {
     return res.status(404).json({ message: "No job with this ID" });

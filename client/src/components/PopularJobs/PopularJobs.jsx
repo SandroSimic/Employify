@@ -2,9 +2,16 @@
 import { useNavigate } from "react-router-dom";
 import Heading from "../Heading";
 import JobsCard from "../Jobs/JobsCard";
-const PopularJobs = ({ jobs }) => {
-  const navigate = useNavigate();
+import { useTopJobs } from "../Jobs/useTopJobs";
+import Spinner from "../Spinner";
+import { calculateDaysAgo } from "../../utils/calculateTime";
 
+const PopularJobs = () => {
+  const navigate = useNavigate();
+  const { data: jobs, isLoading, refetch } = useTopJobs();
+  const popularJobs = jobs?.topJobs || [];
+
+  
   return (
     <section className="popularJobs">
       <Heading
@@ -15,22 +22,24 @@ const PopularJobs = ({ jobs }) => {
         handleClick={() => navigate("/all-jobs")}
       />
       <div className="popularJobs__jobs">
-        {jobs.map((job, index) => (
-          <JobsCard
-            key={index}
-            id={job.id}
-            image={job.image}
-            CompanyName={job.CompanyName}
-            position={job.position}
-            location={job.location}
-            salary={job.salary}
-            monthly={job.monthly}
-            fullTime={job.fullTime}
-            dateOfPost={job.dateOfPost}
-            description={job.description}
-            applied={job.applied}
-          />
-        ))}
+        {isLoading && <Spinner />}
+        {popularJobs &&
+          popularJobs.map((job, index) => (
+            <JobsCard
+              key={index}
+              id={job._id}
+              image={job.companyId.companyImage}
+              CompanyName={job.companyId.companyName}
+              position={job.position}
+              location={job.location}
+              salary={job.salary}
+              monthly={job.salaryType}
+              fullTime={job.jobType}
+              dateOfPost={calculateDaysAgo(job.createdAt)}
+              description={job.description}
+              applied={job.applicants}
+            />
+          ))}
       </div>
     </section>
   );

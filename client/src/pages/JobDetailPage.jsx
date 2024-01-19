@@ -5,6 +5,7 @@ import { FaUsers } from "react-icons/fa";
 
 import JobDetailBox from "../components/Jobs/JobDetailBox";
 import { useJob } from "../components/Jobs/useJob";
+import { formatCleanDate } from "../utils/calculateTime";
 
 const JobDetailPage = () => {
   const { data: job, isLoading, refetch } = useJob();
@@ -17,12 +18,12 @@ const JobDetailPage = () => {
           <div className="jobDetails__heading">
             <div className="jobDetails__heading__title">
               <div className="jobDetails__heading__image">
-                <img src={job.image} />
+                <img src={job.companyId.companyImage} />
               </div>
               <h1>{job.position}</h1>
             </div>
             <div className="jobDetails__heading__jobInfo">
-              <h2>{job.CompanyName}</h2>
+              <h2>{job.companyId.companyName}</h2>
               <p>{job.location}</p>
             </div>
           </div>
@@ -55,7 +56,7 @@ const JobDetailPage = () => {
                 />
                 <JobDetailBox
                   icon={<CiCalendar />}
-                  jobType={job.createdAt}
+                  jobType={formatCleanDate(job.createdAt)}
                   jobTypeDesc={"Date Of Post"}
                 />
                 <button className="jobDetails__main__info__condition__btn">

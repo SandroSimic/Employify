@@ -28,17 +28,16 @@ const JobsCard = ({
               </span>
             </div>
           </div>
-          <div className="line" />
           <div className="job__info__job__salary">
             <span>${salary}</span>
-            <p>/{monthly ? "monthly" : "year"}</p>
+            <p>/{monthly}</p>
           </div>
         </div>
       </div>
       <div className="job__info__text">
         <h2>{position}</h2>
         <span>
-          {fullTime ? "Full Time" : "Part Time"} &bull; {dateOfPost} days ago
+          {fullTime} &bull; {dateOfPost}
         </span>
         <p>{`${description.slice(0, 100)}...`}</p>
       </div>

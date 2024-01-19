@@ -92,10 +92,8 @@
   &__main {
     padding: 5rem;
     display: grid;
-    place-items: center;
-    justify-content: space-between;
     width: 100%;
-    grid-template-columns: repeat(3, minmax(25rem, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     height: 100%;
 

@@ -2,6 +2,7 @@ import express from "express";
 import {
   createCompany,
   getCompanies,
+  getCompanyById,
 } from "../controllers/companyController.js";
 import { protect, restrictTo } from "../middleware/authMiddleware.js";
 import { upload } from "../utils/uploadImage.js";
@@ -18,5 +19,6 @@ router
     createCompany
   );
 
+router.route("/:companyId").get(getCompanyById);
 
 export default router;

@@ -40,4 +40,16 @@ const createCompany = catchAsync(async (req, res, next) => {
   });
 });
 
-export { getCompanies, createCompany };
+const getCompanyById = catchAsync(async (req, res, next) => {
+  const companyId = req.params.companyId;
+
+  const company = await Company.findById(companyId).populate("jobs");
+
+  if (company.length === 0 || !company) {
+    return res.status(404).json({ message: "No company found" });
+  }
+
+  res.status(200).json(company);
+});
+
+export { getCompanies, createCompany, getCompanyById };

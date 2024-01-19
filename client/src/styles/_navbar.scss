@@ -85,6 +85,24 @@
         background-color: var(--primary-color-light);
       }
     }
+
+
+    &__username {
+      font-size: 2rem;
+    }
+
+    & img {
+      width: 5rem;
+      border-radius: 3rem;
+    }
+
+    &--createCompany {
+      padding: 1rem 2rem;
+      background-color: var(--primary-color);
+      color: var(--color-white);
+      border: none;
+      border-radius: 1rem;
+    }
   }
 
   &__hamburger {

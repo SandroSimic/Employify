@@ -6,7 +6,7 @@ import generateToken from "../utils/generateToken.js";
 import { s3Upload } from "../utils/s3Service.js";
 
 const register = catchAsync(async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, role, password } = req.body;
 
   if (!req.file || !req.file.buffer) {
     return next(new AppError("Please provide a profile image", 400));
@@ -18,6 +18,7 @@ const register = catchAsync(async (req, res, next) => {
     username,
     email,
     password,
+    role,
     userImage: data.Location,
   });
 
