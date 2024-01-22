@@ -16,15 +16,17 @@ const getCompanies = catchAsync(async (req, res, next) => {
 });
 
 const createCompany = catchAsync(async (req, res, next) => {
-  const { companyName } = req.body;
+  const { companyName, companyDescription } = req.body;
 
   if (!req.file || !req.file.buffer) {
     return next(new AppError("Please provide a profile image", 400));
   }
 
   const data = await s3Upload(req.file);
+  console.log(data)
   const newCompany = await Company.create({
     companyName,
+    companyDescription,
     owner: req.user._id,
     companyImage: data.Location,
   });

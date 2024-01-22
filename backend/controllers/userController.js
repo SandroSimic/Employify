@@ -12,7 +12,7 @@ const getLoggedInUser = catchAsync(async (req, res, next) => {
 
   const user = await User.findById(userId).populate("companyId")
 
-  if (!user || user === undefined) {
+  if (!user || user === null) {
     return next(new AppError("User not found", 404));
   }
 

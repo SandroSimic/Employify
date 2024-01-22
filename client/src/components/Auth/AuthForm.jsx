@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogin } from "./useLogin";
 import { useForm } from "react-hook-form";
 import { useRegister } from "./useRegister";
-import { useCreateCompany } from "./useCreateCompany";
 
+// eslint-disable-next-line react/prop-types
 const AuthForm = ({ formType }) => {
   const [userType, setUserType] = useState("employee");
   const { isLoading, loginUserQuery } = useLogin();
@@ -52,6 +53,8 @@ const AuthForm = ({ formType }) => {
   function onError(errors) {
     console.log(errors);
   }
+
+  if (isLoading || isRegistering) return <h1>Loading...</h1>;
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="auth__mainForm">

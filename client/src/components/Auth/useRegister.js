@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { registerUser } from "../../api/usersApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function useRegister() {
   const queryClient = useQueryClient();
@@ -14,8 +15,7 @@ export function useRegister() {
       navigate("/login", { replace: true });
     },
     onError: (err) => {
-      console.log(err.response.data.message);
-      console.log(err);
+      toast.error(err.response.data.message);
     },
   });
 

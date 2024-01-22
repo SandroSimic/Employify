@@ -5,6 +5,10 @@ const companySchema = new mongoose.Schema({
     type: String,
     required: [true, "CompanyName is required"],
   },
+  companyDescription: {
+    type: String,
+    required: [true, "Company description is required"],
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

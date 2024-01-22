@@ -5,7 +5,7 @@ import {
   getCompanyById,
 } from "../controllers/companyController.js";
 import { protect, restrictTo } from "../middleware/authMiddleware.js";
-import { upload } from "../utils/uploadImage.js";
+import { compressImage, upload } from "../utils/uploadImage.js";
 
 const router = express.Router();
 
@@ -16,6 +16,7 @@ router
     protect,
     restrictTo("employer"),
     upload.single("companyImage"),
+    compressImage,
     createCompany
   );
 

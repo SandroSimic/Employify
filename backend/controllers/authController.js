@@ -8,6 +8,11 @@ import { s3Upload } from "../utils/s3Service.js";
 const register = catchAsync(async (req, res, next) => {
   const { username, email, role, password } = req.body;
 
+
+  if(!username || !email || !password || !role) {
+    return next(new AppError("Please provide all fields", 400));
+  }
+
   if (!req.file || !req.file.buffer) {
     return next(new AppError("Please provide a profile image", 400));
   }

@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  position: sticky;
   align-items: center;
   justify-content: space-between;
   padding: 0rem 5rem;
@@ -57,9 +58,21 @@
   }
 
   &__actions {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 5rem;
+
+    &__userInfo {
+      display: flex;
+      align-items: center;
+      gap: 6rem;
+
+      & img {
+        outline: 5px solid var(--primary-color-light);
+        padding: 0.2rem;
+      }
+    }
 
     &--signIn {
       font-size: 2rem;
@@ -86,9 +99,50 @@
       }
     }
 
-
     &__username {
       font-size: 2rem;
+      position: relative;
+      background-color: var(--primary-color-light);
+      padding: 1rem 3rem;
+      display: flex;
+      color: white;
+      border-radius: 1rem;
+      &:hover {
+        cursor: pointer;
+        background-color: var(--primary-color);
+      }
+
+      &__dropdown {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        bottom: -12rem;
+        border-radius: 1rem;
+        left: 0;
+        position: absolute;
+        z-index: 30;
+
+        &__btn {
+          border-radius: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 3rem;
+          font-size: 1.6rem;
+          border: none;
+          padding: 2rem;
+          height: 100%;
+          color: white;
+          background-color: var(--primary-color-light);
+          &:first-child {
+            border-bottom: 1px solid var(--secondary-color);
+          }
+
+          &:hover {
+            background-color: var(--primary-color);
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     & img {
@@ -102,6 +156,12 @@
       color: var(--color-white);
       border: none;
       border-radius: 1rem;
+
+      &:hover {
+        background-color: var(--primary-color-light);
+        cursor: pointer;
+        box-shadow: 0.1rem 1rem 3rem 0.3rem var(--secondary-color);
+      }
     }
   }
 

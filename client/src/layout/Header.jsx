@@ -2,20 +2,24 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoggedInUser } from "../components/Auth/useLoggedInUser";
-
-const AuthButton = ({ to, text, className }) => (
-  <Link to={to}>
-    <button className={`header__actions--${className}`}>{text}</button>
-  </Link>
-);
+import UserActions from "../components/Header/UserActions";
 
 const Header = () => {
   const [isOpenNav, setIsOpenNav] = useState(false);
-  const { user, refetch } = useLoggedInUser();
-  const { user: loggedUser } = user || {};
+  const [isOpenUserDropdown, setIsOpenUserDropdown] = useState(false);
+  const { data, refetch } = useLoggedInUser();
+  const { user: loggedUser } = data || {};
 
   useEffect(() => {
-    refetch();
+    const fetchData = async () => {
+      try {
+        await refetch();
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [refetch]);
 
   return (
@@ -32,30 +36,11 @@ const Header = () => {
           <li>Talent</li>
         </ul>
       </nav>
-      <div className="header__actions">
-        {!loggedUser && (
-          <>
-            <AuthButton to="/login" text="Sign In" className="signIn" />
-            <AuthButton to="/register" text="Register" className="register" />
-          </>
-        )}
-        {loggedUser?.companyId && (
-          <>
-            <p className="header__actions__username">{loggedUser.username}</p>
-            <img
-              src={loggedUser.companyId.companyImage}
-              alt={loggedUser.companyId.companyName}
-              className="header__actions__image"
-            />
-          </>
-        )}
-        {loggedUser && !loggedUser.companyId && (
-          <>
-            <p className="header__actions__username">{loggedUser.username}</p>
-            <AuthButton to="/create-company" text="Create Company" className="createCompany" />
-          </>
-        )}
-      </div>
+      <UserActions
+        loggedUser={loggedUser}
+        isOpenUserDropdown={isOpenUserDropdown}
+        setIsOpenUserDropdown={setIsOpenUserDropdown}
+      />
       <div
         className={`header__hamburger${isOpenNav ? "--active" : ""}`}
         onClick={() => setIsOpenNav(!isOpenNav)}

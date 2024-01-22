@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginUser } from "../../api/usersApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function useLogin() {
   const queryClient = useQueryClient();
@@ -9,13 +10,13 @@ export function useLogin() {
   const { mutate: loginUserQuery, isLoading } = useMutation({
     mutationFn: loginUser,
     onSuccess: (user) => {
-      console.log(user);
+      toast.success("Logged In");
       queryClient.setQueryData(["user"], user);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/", { replace: true });
     },
     onError: (err) => {
-      console.log(err.response.data.message);
-      console.log(err);
+      toast.error(err.response.data.message);
     },
   });
 

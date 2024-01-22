@@ -7,6 +7,8 @@ import AllJobsPage from "./pages/AllJobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+import CreateCompanyPage from "./pages/CreateCompanyPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,11 +28,13 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/all-jobs" element={<AllJobsPage />} />
             <Route path="/job/:jobId" element={<JobDetailPage />} />
+            <Route path="/job/create-company" element={<CreateCompanyPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
+      <Toaster position="top-center" reverseOrder={false} />
     </QueryClientProvider>
   );
 }
