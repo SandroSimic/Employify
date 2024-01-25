@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
+import AddJobPage from "./pages/AddJobPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,8 +29,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
             <Route path="/all-jobs" element={<AllJobsPage />} />
-            <Route path="/job/:jobId" element={<JobDetailPage />} />
             <Route path="/job/create-company" element={<CreateCompanyPage />} />
+            <Route path="/job/add-job" element={<AddJobPage />} />
+            <Route path="/job/:jobId" element={<JobDetailPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

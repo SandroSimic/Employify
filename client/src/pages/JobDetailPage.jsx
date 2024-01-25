@@ -4,7 +4,6 @@ import { CiCalendar } from "react-icons/ci";
 import { FaUsers } from "react-icons/fa";
 import { FiClipboard } from "react-icons/fi";
 
-
 import JobDetailBox from "../components/Jobs/JobDetailBox";
 import { useJob } from "../components/Jobs/useJob";
 import { formatCleanDate } from "../utils/calculateTime";
@@ -31,7 +30,7 @@ const JobDetailPage = () => {
           </div>
           <div className="jobDetails__main">
             <div className="jobDetails__main__desc">
-              <p>{job.description}</p>
+              <p dangerouslySetInnerHTML={{ __html: job.description }}></p>
             </div>
             <div className="jobDetails__main__info">
               <div className="jobDetails__main__info__location">

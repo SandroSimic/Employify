@@ -1,0 +1,55 @@
+.addJob {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 50rem;
+    & h2 {
+      font-size: 3rem;
+      color: var(--primary-color-light);
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      height: 100%;
+
+      & label {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: var(--primary-color-light);
+      }
+
+      & input,
+      select {
+        padding: 1.5rem;
+        font-size: 1.6rem;
+      }
+    }
+
+    > div:last-child {
+      height: 10rem;
+    }
+
+    &__btn {
+      padding: 1.5rem 3rem;
+      background-color: var(--primary-color);
+      border: none;
+      outline: none;
+      font-size: 2rem;
+      color: white;
+      border-radius: 3rem;
+
+      &:hover {
+        background-color: var(--primary-color-light);
+        cursor: pointer;
+      }
+    }
+  }
+}

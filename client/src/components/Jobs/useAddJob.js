@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCompany } from "../../api/companyApi";
 import { useNavigate } from "react-router-dom";
+import { createJob } from "../../api/jobApi";
 
-export function useCreateCompany() {
+export function useAddJob() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: createCompanyQuery, isLoading } = useMutation({
-    mutationFn: createCompany,
+  const { mutate: createJobQuery, isLoading } = useMutation({
+    mutationFn: createJob,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["user"] });
+      await queryClient.invalidateQueries({ queryKey: ["jobs"] });
       navigate("/");
     },
     onError: (err) => {
@@ -18,5 +18,5 @@ export function useCreateCompany() {
     },
   });
 
-  return { isLoading, createCompanyQuery };
+  return { isLoading, createJobQuery };
 }

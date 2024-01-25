@@ -17,3 +17,14 @@ export const getTopJobs = async () => {
   const { data } = await axios.get(`${jobUrl}/top-jobs`);
   return data;
 };
+
+export const createJob = async (jobData) => {
+  const { data } = await axios.post(jobUrl, jobData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
+
+  return data;
+};
