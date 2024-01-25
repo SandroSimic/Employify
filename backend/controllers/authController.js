@@ -8,8 +8,7 @@ import { s3Upload } from "../utils/s3Service.js";
 const register = catchAsync(async (req, res, next) => {
   const { username, email, role, password } = req.body;
 
-
-  if(!username || !email || !password || !role) {
+  if (!username || !email || !password || !role) {
     return next(new AppError("Please provide all fields", 400));
   }
 
@@ -49,4 +48,10 @@ const login = catchAsync(async (req, res, next) => {
     return next(new AppError("Email or Password is incorrect", 401));
   }
 });
-export { register, login };
+
+const logout = catchAsync(async (req, res, next) => {
+  res.clearCookie("jwt");
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+export { register, login, logout };

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const JobsCard = ({
   id,
   image,
-  CompanyName,
+  companyName,
   location,
   salary,
   monthly,
@@ -22,7 +22,7 @@ const JobsCard = ({
           <div className="job__info__job__location">
             <img src={image} />
             <div className="job__info__job__location__text">
-              <h3>{CompanyName}</h3>
+              <h3>{companyName}</h3>
               <span>
                 <FaLocationDot className="span__icon" /> {location}
               </span>

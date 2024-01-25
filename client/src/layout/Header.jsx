@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoggedInUser } from "../components/Auth/useLoggedInUser";
 import UserActions from "../components/Header/UserActions";
@@ -7,20 +7,8 @@ import UserActions from "../components/Header/UserActions";
 const Header = () => {
   const [isOpenNav, setIsOpenNav] = useState(false);
   const [isOpenUserDropdown, setIsOpenUserDropdown] = useState(false);
-  const { data, refetch } = useLoggedInUser();
-  const { user: loggedUser } = data || {};
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await refetch();
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [refetch]);
+  const [isOpenCompanyDropdown, setIsOpenCompanyDropdown] = useState(false);
+  const { data, error, isLoading } = useLoggedInUser();
 
   return (
     <header className="header">
@@ -37,9 +25,11 @@ const Header = () => {
         </ul>
       </nav>
       <UserActions
-        loggedUser={loggedUser}
+        loggedUser={data}
         isOpenUserDropdown={isOpenUserDropdown}
         setIsOpenUserDropdown={setIsOpenUserDropdown}
+        isOpenCompanyDropdown={isOpenCompanyDropdown}
+        setIsOpenCompanyDropdown={setIsOpenCompanyDropdown}
       />
       <div
         className={`header__hamburger${isOpenNav ? "--active" : ""}`}

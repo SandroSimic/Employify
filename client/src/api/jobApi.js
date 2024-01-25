@@ -3,8 +3,8 @@ import { BASE_URL } from "../utils/constants";
 
 const jobUrl = `${BASE_URL}/jobs`;
 
-export const getJobs = async () => {
-  const { data } = await axios.get(jobUrl, { withCredentials: true });
+export const getJobs = async (params) => {
+  const { data } = await axios.get(jobUrl, { withCredentials: true, params });
   return data;
 };
 

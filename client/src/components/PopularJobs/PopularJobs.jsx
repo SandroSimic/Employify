@@ -8,10 +8,11 @@ import { calculateDaysAgo } from "../../utils/calculateTime";
 
 const PopularJobs = () => {
   const navigate = useNavigate();
-  const { data: jobs, isLoading, refetch } = useTopJobs();
-  const popularJobs = jobs?.topJobs || [];
+  const { data: jobs, isLoading } = useTopJobs();
+  const popularJobs = jobs?.topJobs;
+  console.log(popularJobs);
+  console.log(jobs);
 
-  
   return (
     <section className="popularJobs">
       <Heading
@@ -23,13 +24,14 @@ const PopularJobs = () => {
       />
       <div className="popularJobs__jobs">
         {isLoading && <Spinner />}
-        {popularJobs &&
+        {!isLoading &&
+          popularJobs &&
           popularJobs.map((job, index) => (
             <JobsCard
               key={index}
               id={job._id}
-              image={job.companyId.companyImage}
-              CompanyName={job.companyId.companyName}
+              image={job.companyId?.companyImage}
+              companyName={job.companyId?.companyName}
               position={job.position}
               location={job.location}
               salary={job.salary}
@@ -40,6 +42,7 @@ const PopularJobs = () => {
               applied={job.applicants}
             />
           ))}
+          {popularJobs?.length === 0 && <h1>No Popular Jobs Found</h1>}
       </div>
     </section>
   );

@@ -13,7 +13,8 @@ import CreateCompanyPage from "./pages/CreateCompanyPage";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      retry: 2,
+      retryDelay: 2000
     },
   },
 });

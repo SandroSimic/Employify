@@ -18,7 +18,11 @@ export const loggedInUser = async () => {
     withCredentials: true,
   });
 
-  return data;
+  if(!data) {
+    throw new Error("Not Logged in")
+  }
+
+  return data.user;
 };
 
 export const registerUser = async (userData) => {
@@ -30,4 +34,10 @@ export const registerUser = async (userData) => {
   });
 
   return data;
+};
+
+export const logoutUser = async () => {
+  await axios.post(`${BASE_URL}/users/logout`, null, {
+    withCredentials: true,
+  });
 };

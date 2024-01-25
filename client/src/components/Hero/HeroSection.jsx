@@ -10,11 +10,7 @@ const HeroSection = () => {
           Exciting Career Paths!
         </p>
       </div>
-      <div className="hero__search">
-        <input type="text" placeholder="Job title or keyword" />
-        <input type="text" placeholder="Location" />
-        <button>Search</button>
-      </div>
+
       <div className="hero__ball1" />
       <div className="hero__ball2" />
     </section>

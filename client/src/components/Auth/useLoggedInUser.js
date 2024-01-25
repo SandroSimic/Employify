@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { loggedInUser } from "../../api/usersApi";
 export function useLoggedInUser() {
-  const { data, error, isLoading, refetch } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["user"],
-    queryFn: () => loggedInUser(),
+    queryFn: loggedInUser,
   });
 
-
-  return { data, error, isLoading, refetch };
+  return { data, error, isLoading };
 }

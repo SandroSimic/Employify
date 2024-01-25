@@ -5,6 +5,8 @@ const UserInfo = ({
   loggedUser,
   isOpenUserDropdown,
   setIsOpenUserDropdown,
+  setIsOpenCompanyDropdown,
+  isOpenCompanyDropdown,
 }) => (
   <div className="header__actions__userInfo">
     <div
@@ -19,6 +21,7 @@ const UserInfo = ({
         src={loggedUser.companyId.companyImage}
         alt={loggedUser.companyId.companyName}
         className="header__actions__image"
+        onClick={() => setIsOpenCompanyDropdown(!isOpenCompanyDropdown)}
       />
     ) : (
       <img

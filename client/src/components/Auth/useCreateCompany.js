@@ -9,9 +9,9 @@ export function useCreateCompany() {
 
   const { mutate: createCompanyQuery, isLoading } = useMutation({
     mutationFn: createCompany,
-    onSuccess: (company) => {
-      queryClient.invalidateQueries("user");
-      navigate('/');
+    onSuccess: async (company) => {
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
     },
     onError: (err) => {
       console.log(err.response.data.message);

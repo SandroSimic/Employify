@@ -18,9 +18,11 @@ const protect = catchAsync(async (req, res, next) => {
       return next(new AppError("Not authorized, token failed", 401));
     }
   } else {
-    return next(new AppError("Not authorized, no token", 401));
+    // Instead of calling next with an AppError, respond with a 401 status
+    return res.status(401).json({ error: "Not authorized, no token" });
   }
 });
+
 
 const restrictTo = (...roles) => {
   return (req, res, next) => {

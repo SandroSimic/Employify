@@ -30,9 +30,14 @@ const jobSchema = new mongoose.Schema(
     },
     jobType: {
       type: String,
-      enum: ["Full-Time", "Part-Time"],
+      enum: ["Full-Time", "Part-Time", "Freelance"],
       required: [true, "JobType is required"],
       default: "full-time",
+    },
+    experience: {
+      type: String,
+      enum: ["Entry Level", "Mid Level", "Senior Level"],
+      required: [true, "Experience is required"],
     },
     description: {
       type: String,

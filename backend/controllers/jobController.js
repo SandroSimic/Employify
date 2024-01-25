@@ -13,6 +13,7 @@ const createJob = catchAsync(async (req, res, next) => {
     jobType,
     description,
     category,
+    experience,
   } = req.body;
 
   const userId = req.user._id;
@@ -28,6 +29,7 @@ const createJob = catchAsync(async (req, res, next) => {
     jobType,
     description,
     category,
+    experience,
   });
 
   await Company.findByIdAndUpdate(
@@ -40,12 +42,49 @@ const createJob = catchAsync(async (req, res, next) => {
 });
 
 const getJobs = catchAsync(async (req, res, next) => {
-  const jobs = await Job.find().populate('companyId', '-jobs');
+  // Build Query
+  const queryObj = { ...req.query };
+  const excludedFields = ["page", "limit", "search"];
+  excludedFields.forEach((el) => {
+    delete queryObj[el];
+  });
 
-  if (jobs.length === 0 || !jobs) {
-    return res.status(404).json({ message: "No job found" });
+  if (req.query.search) {
+    queryObj.position = { $regex: new RegExp(req.query.search, "i") };
   }
 
+  if (req.query.location) {
+    queryObj.location = { $regex: new RegExp(req.query.location, "i") };
+  }
+  if (req.query.salaryType) {
+    queryObj.salaryType = { $regex: new RegExp(req.query.salaryType, "i") };
+  }
+  if (req.query.category) {
+    queryObj.category = { $regex: new RegExp(req.query.category, "i") };
+  }
+  console.log(queryObj);
+  let query = Job.find(queryObj).populate("companyId", "-jobs");
+
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 100;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  if (req.query.page) {
+    const numJobs = await Job.countDocuments();
+    if (skip >= numJobs) {
+      return next(new AppError("This Page does not exist", 404));
+    }
+  }
+  // Execute Query
+  const jobs = await query;
+
+  if (jobs.length === 0 || !jobs) {
+    return next(new AppError("No jobs found", 404));
+  }
+
+  // Send Query
   res.status(200).json(jobs);
 });
 
@@ -54,7 +93,7 @@ const getJobById = async (req, res) => {
   const job = await Job.findById(id).populate("companyId");
 
   if (!job) {
-    return res.status(404).json({ message: "No job with this ID" });
+    return next(new AppError("No jobs found with that ID", 404));
   }
 
   res.status(200).json(job);
@@ -122,7 +161,10 @@ const deleteJob = catchAsync(async (req, res, next) => {
 });
 
 const getTopJobs = catchAsync(async (req, res, next) => {
-  const topJobs = await Job.find({}).sort({ applicants: -1 }).limit(6).populate("companyId");
+  const topJobs = await Job.find({})
+    .sort({ applicants: -1 })
+    .limit(6)
+    .populate("companyId");
 
   res.status(200).json({ topJobs });
 });

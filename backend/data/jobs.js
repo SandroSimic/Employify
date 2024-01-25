@@ -1,11 +1,12 @@
 export const jobs = [
   {
-    companyId: "65a72b52054fb3767390076c",
-    userId: "65a72aecaf7f1820a44ce460",
+    companyId: "65b01c24f2ba6ff5044b4e19",
+    userId: "65b01b43eec81acec164b931",
     position: "Senior Flutter Developer",
     location: "Los Vegas",
     salary: 120000,
     salaryType: "yearly",
+    experience: "Entry Level",
     jobType: "Full-Time",
     description:
       "We are looking for a Senior Web developer with 5+ year of experience in Flutter",
@@ -13,11 +14,14 @@ export const jobs = [
     applicants: 0,
   },
   {
+    companyId: "65b01c24f2ba6ff5044b4e19",
+    userId: "65b01b43eec81acec164b931",
     companyName: "Marketing Masters",
     position: "Marketing Specialist",
     location: "New York, NY",
     salary: 5000,
     salaryType: "monthly",
+    experience: "Mid Level",
     jobType: "Full-Time",
     description:
       "Exciting opportunity to shape marketing strategies and campaigns for global brands.",
@@ -25,22 +29,28 @@ export const jobs = [
     applicants: 10,
   },
   {
+    companyId: "65b01c24f2ba6ff5044b4e19",
+    userId: "65b01b43eec81acec164b931",
     companyName: "Health Hub",
     position: "Registered Nurse",
     location: "Los Angeles, CA",
     salary: 80000,
     salaryType: "yearly",
+    experience: "Senior Level",
     jobType: "Full-Time",
     description: "Provide compassionate healthcare services to our community.",
     category: "Healthcare",
     applicants: 3,
   },
   {
+    companyId: "65b01c24f2ba6ff5044b4e19",
+    userId: "65b01b43eec81acec164b931",
     companyName: "Financial Wizards",
     position: "Financial Analyst",
     location: "Chicago, IL",
     salary: 90000,
     salaryType: "yearly",
+    experience: "Senior Level",
     jobType: "Full-Time",
     description:
       "Analyzing financial data and providing insights for strategic decision-making.",
@@ -48,11 +58,14 @@ export const jobs = [
     applicants: 8,
   },
   {
+    companyId: "65b01c24f2ba6ff5044b4e19",
+    userId: "65b01b43eec81acec164b931",
     companyName: "Education Excellence",
     position: "Teacher",
     location: "Boston, MA",
     salary: 60000,
     salaryType: "yearly",
+    experience: "Mid Level",
     jobType: "Full-Time",
     description:
       "Inspire and educate students in a dynamic learning environment.",

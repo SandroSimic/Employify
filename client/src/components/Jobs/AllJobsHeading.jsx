@@ -1,66 +1,73 @@
+/* eslint-disable react/prop-types */
 import { FaSearch } from "react-icons/fa";
 import { IoMdPin } from "react-icons/io";
+import ExperienceLevel from "./Filters/ExperienceLevel";
+import JobType from "./Filters/JobType";
+import SalaryType from "./Filters/SalaryType";
+import Category from "./Filters/Category";
 
-const AllJobsHeading = () => {
+const AllJobsHeading = ({
+  search,
+  setSearch,
+  handleSubmit,
+  location,
+  setLocation,
+  clearFilters,
+  experience,
+  setExperience,
+  jobType,
+  setJobType,
+  salary,
+  setSalaryType,
+  category,
+  setCategory
+}) => {
   return (
     <div className="allJobs__heading">
-      <form className="allJobs__heading__form">
-        <div className="allJobs__heading__form__input">
-          <FaSearch className="allJobs__heading__form__input--icon" />
-          <input type="text" placeholder="Job Title, keywords" />
+      <form onSubmit={handleSubmit}>
+        <div className="allJobs__heading__form">
+          <div className="allJobs__heading__form__input">
+            <FaSearch className="allJobs__heading__form__input--icon" />
+            <input
+              type="text"
+              name="position"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Job Title, keywords"
+            />
+          </div>
+          <div className="allJobs__heading__form__input">
+            <IoMdPin className="allJobs__heading__form__input--icon" />
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              onChange={(e) => setLocation(e.target.value)}
+              value={location}
+            />
+          </div>
+          <button type="submit" className="allJobs__heading__form__btn">
+            Search
+          </button>
+          <button
+            type="submit"
+            className="allJobs__heading__form__btn"
+            onClick={clearFilters}
+          >
+            Clear Filters
+          </button>
         </div>
-        <div className="allJobs__heading__form__input">
-          <IoMdPin className="allJobs__heading__form__input--icon" />
-          <input type="text" placeholder="Location" />
+
+        <div className="allJobs__heading__filters">
+          <ExperienceLevel
+            experience={experience}
+            setExperience={setExperience}
+          />
+          <JobType jobType={jobType} setJobType={setJobType} />
+          <SalaryType salaryType={salary} setSalaryType={setSalaryType} />
+          <Category category={category} setCategory={setCategory}/>
         </div>
-        <button className="allJobs__heading__form__btn">Search</button>
       </form>
-      <div className="allJobs__heading__filters">
-        <select>
-          <option selected disabled hidden>
-            Location
-          </option>
-          <option>Remote</option>
-          <option>Office</option>
-        </select>
-        <select>
-          <option selected disabled hidden>
-            Experience Level
-          </option>
-          <option>Entry Level</option>
-          <option>Mid Level</option>
-          <option>Senior Level</option>
-        </select>
-        <select>
-          <option selected disabled hidden>
-            Job Type
-          </option>
-          <option>Full-Time</option>
-          <option>Part-Time</option>
-          <option>Freelance</option>
-        </select>
-        <select>
-          <option selected disabled hidden>
-            Salary
-          </option>
-          <option>Monthly</option>
-          <option>Yearly</option>
-        </select>
-        <select>
-          <option selected disabled hidden>
-            Category
-          </option>
-          <option>Design & Development</option>
-          <option>Marketing & Communication</option>
-          <option>Digital Marketing</option>
-          <option>Customer Service Care</option>
-          <option>Finance Management</option>
-          <option>Business & Consulting</option>
-          <option>Healthcare</option>
-          <option>Education</option>
-          <option>Fitness and Wellness</option>
-        </select>
-      </div>
     </div>
   );
 };

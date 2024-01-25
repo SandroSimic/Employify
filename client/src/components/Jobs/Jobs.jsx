@@ -10,7 +10,7 @@ const Jobs = ({ jobs }) => {
         <JobsCard
           key={index}
           id={job._id}
-          CompanyName={job.companyId.companyName}
+          companyName={job.companyId.companyName}
           position={job.position}
           location={job.location}
           salary={job.salary}

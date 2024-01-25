@@ -2,6 +2,8 @@ import { BsClock } from "react-icons/bs";
 import { LuMapPin } from "react-icons/lu";
 import { CiCalendar } from "react-icons/ci";
 import { FaUsers } from "react-icons/fa";
+import { FiClipboard } from "react-icons/fi";
+
 
 import JobDetailBox from "../components/Jobs/JobDetailBox";
 import { useJob } from "../components/Jobs/useJob";
@@ -58,6 +60,11 @@ const JobDetailPage = () => {
                   icon={<CiCalendar />}
                   jobType={formatCleanDate(job.createdAt)}
                   jobTypeDesc={"Date Of Post"}
+                />
+                <JobDetailBox
+                  icon={<FiClipboard />}
+                  jobType={job.experience}
+                  jobTypeDesc={"Experience"}
                 />
                 <button className="jobDetails__main__info__condition__btn">
                   Apply for this job

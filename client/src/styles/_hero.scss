@@ -53,8 +53,6 @@
         font-size: 4.5rem;
       }
 
-
-
       & span {
         color: var(--primary-color);
       }
@@ -71,58 +69,6 @@
       @media screen and (max-width: $bp-small) {
         font-size: 1.6rem;
       }
-    }
-  }
-
-  &__search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    box-shadow: 0.1rem 1rem 3rem 0.3rem var(--secondary-color);
-    background-color: white;
-    padding: 1rem;
-    & input {
-      border: none;
-      font-size: 2rem;
-      outline: none;
-      padding: 1rem;
-
-      @media screen and (max-width: $bp-small) {
-        border-bottom: 1px solid var(--color-grey);
-        border-right: none;
-      }
-
-      &:nth-child(1) {
-        border-right: 1px solid var(--color-grey);
-
-        @media screen and (max-width: $bp-small) {
-          border-right: none;
-        }
-      }
-      width: 25rem;
-
-      @media screen and (max-width: $bp-small) {
-        width: 90%;
-      }
-    }
-
-    & button {
-      background-color: var(--primary-color);
-      border: none;
-      color: var(--color-white);
-      padding: 2rem 2rem;
-      font-size: 2rem;
-      border-radius: 1rem;
-
-      @media screen and (max-width: $bp-small) {
-        width: 100%;
-      }
-    }
-
-    @media screen and (max-width: $bp-small) {
-      flex-direction: column;
-      width: 100%;
     }
   }
 }
