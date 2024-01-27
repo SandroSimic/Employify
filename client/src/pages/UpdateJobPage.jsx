@@ -26,7 +26,7 @@ const UpdateJobPage = () => {
     const formData = getValues();
     try {
       console.log(formData);
-      await updateJobQuery({jobData: formData, jobId});
+      await updateJobQuery({ jobData: formData, jobId });
     } catch (error) {
       console.log(error);
     }
@@ -159,7 +159,11 @@ const UpdateJobPage = () => {
               )}
             />
           </div>
-          <button type="submit" className="addJob__form__btn">
+          <button
+            type="submit"
+            className="addJob__form__btn"
+            disabled={isUpdating}
+          >
             Update Job
           </button>
         </form>

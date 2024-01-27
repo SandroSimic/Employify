@@ -63,7 +63,20 @@ const getJobs = catchAsync(async (req, res, next) => {
     queryObj.category = { $regex: new RegExp(req.query.category, "i") };
   }
 
-  let query = Job.find(queryObj).populate("companyId", "-jobs");
+  let query = Job.find(queryObj)
+    .populate({
+      path: "companyId",
+      select: "-jobs",
+    })
+    .populate({
+      path: "applicants",
+      populate: {
+        path: "user",
+        model: "User",
+        select: "username email image userImage",
+      },
+      select: "-job",
+    });
 
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 100;
@@ -91,7 +104,7 @@ const getJobs = catchAsync(async (req, res, next) => {
   res.status(200).json({ jobs, totalPages });
 });
 
-const getJobById = async (req, res) => {
+const getJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const job = await Job.findById(id).populate("companyId");
 
@@ -100,7 +113,7 @@ const getJobById = async (req, res) => {
   }
 
   res.status(200).json(job);
-};
+});
 
 const updateJob = catchAsync(async (req, res, next) => {
   const {

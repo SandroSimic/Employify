@@ -59,8 +59,12 @@ const jobSchema = new mongoose.Schema(
       required: [true, "Category for a job is required"],
     },
     applicants: {
-      type: Number,
-      default: 0,
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Applicant",
+        },
+      ],
     },
   },
   {
