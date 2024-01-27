@@ -9,9 +9,8 @@ const AddJobPage = () => {
   const { handleSubmit, register, getValues, control } = useForm();
 
   const onSubmit = async () => {
-    const formData = getValues(); // Retrieve all form values
+    const formData = getValues(); 
     try {
-      // Call your createJobQuery function with the form data
       await createJobQuery(formData);
     } catch (error) {
       console.error("Error creating job:", error);

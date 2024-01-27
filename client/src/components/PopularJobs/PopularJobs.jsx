@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-import Heading from "../Heading";
+import Heading from "../UI/Heading";
 import JobsCard from "../Jobs/JobsCard";
 import { useTopJobs } from "../Jobs/useTopJobs";
-import Spinner from "../Spinner";
+import Spinner from "../UI/Spinner";
 
 const PopularJobs = () => {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ const PopularJobs = () => {
         handleClick={() => navigate("/all-jobs")}
       />
       <div className="popularJobs__jobs">
-        {isLoading && <Spinner />}
         {!isLoading &&
           popularJobs &&
           popularJobs.map((job, index) => (
@@ -29,8 +28,9 @@ const PopularJobs = () => {
               data={job}
             />
           ))}
-          {popularJobs?.length === 0 && <h1>No Popular Jobs Found</h1>}
+        {popularJobs?.length === 0 && <h1>No Popular Jobs Found</h1>}
       </div>
+      {isLoading && <Spinner />}
     </section>
   );
 };

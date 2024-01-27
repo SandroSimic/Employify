@@ -10,12 +10,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
 import AddJobPage from "./pages/AddJobPage";
+import UpdateJobPage from "./pages/UpdateJobPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      retryDelay: 2000
+      retryDelay: 2000,
     },
   },
 });
@@ -32,6 +33,7 @@ function App() {
             <Route path="/job/create-company" element={<CreateCompanyPage />} />
             <Route path="/job/add-job" element={<AddJobPage />} />
             <Route path="/job/:jobId" element={<JobDetailPage />} />
+            <Route path="/job/update-job/:jobId" element={<UpdateJobPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

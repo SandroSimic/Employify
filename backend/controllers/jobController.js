@@ -62,30 +62,33 @@ const getJobs = catchAsync(async (req, res, next) => {
   if (req.query.category) {
     queryObj.category = { $regex: new RegExp(req.query.category, "i") };
   }
-  console.log(queryObj);
+
   let query = Job.find(queryObj).populate("companyId", "-jobs");
 
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 100;
   const skip = (page - 1) * limit;
 
+  const numJobs = await Job.countDocuments(queryObj);
+
   query = query.skip(skip).limit(limit);
 
   if (req.query.page) {
-    const numJobs = await Job.countDocuments();
     if (skip >= numJobs) {
       return next(new AppError("This Page does not exist", 404));
     }
   }
-  // Execute Query
+
   const jobs = await query;
+
+  const totalPages = Math.ceil(numJobs / limit);
 
   if (jobs.length === 0 || !jobs) {
     return next(new AppError("No jobs found", 404));
   }
 
   // Send Query
-  res.status(200).json(jobs);
+  res.status(200).json({ jobs, totalPages });
 });
 
 const getJobById = async (req, res) => {
@@ -101,13 +104,14 @@ const getJobById = async (req, res) => {
 
 const updateJob = catchAsync(async (req, res, next) => {
   const {
-    companyName,
     position,
     location,
     salary,
-    monthly,
-    fullTime,
+    salaryType,
+    jobType,
     description,
+    category,
+    experience,
   } = req.body;
 
   const { id } = req.params;
@@ -122,14 +126,24 @@ const updateJob = catchAsync(async (req, res, next) => {
     return next(new AppError("The job does not exist", 404));
   }
 
+  if (
+    req.user._id.toString() !== existingJob.userId.toString() &&
+    req.user.role !== "admin"
+  ) {
+    return next(
+      new AppError("You don't have permission to update this job", 403)
+    );
+  }
+
   let updatedJobData = {
-    companyName,
     position,
     location,
     salary,
-    monthly,
-    fullTime,
+    salaryType,
+    jobType,
     description,
+    category,
+    experience,
   };
 
   const updatedJob = await Job.findByIdAndUpdate(id, updatedJobData, {
@@ -151,6 +165,17 @@ const deleteJob = catchAsync(async (req, res, next) => {
     return next(new AppError("Invalid Job Id", 404));
   }
 
+  const existingJob = await Job.findById(id);
+  console.log(existingJob);
+  if (
+    req.user._id.toString() !== existingJob.userId.toString() &&
+    req.user.role !== "admin"
+  ) {
+    return next(
+      new AppError("You don't have permission to update this job", 403)
+    );
+  }
+
   const job = await Job.findByIdAndDelete(id);
 
   if (job) {
@@ -161,7 +186,7 @@ const deleteJob = catchAsync(async (req, res, next) => {
 });
 
 const getTopJobs = catchAsync(async (req, res, next) => {
-  const topJobs = await Job.find({})
+  const topJobs = await Job.find()
     .sort({ applicants: -1 })
     .limit(6)
     .populate("companyId");

@@ -13,6 +13,10 @@ const router = express.Router();
 
 router.route("/").get(getJobs).post(protect, restrictTo("employer"), createJob);
 router.route("/top-jobs").get(getTopJobs);
-router.route("/:id").get(getJobById).patch(updateJob).delete(deleteJob);
+router
+  .route("/:id")
+  .get(getJobById)
+  .patch(protect, restrictTo("employer", "admin"), updateJob)
+  .delete(protect, restrictTo("employer", "admin"), deleteJob);
 
 export default router;

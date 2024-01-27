@@ -16,6 +16,47 @@
     flex-direction: column;
     gap: 3rem;
 
+    &__info {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: baseline;
+      gap: 3rem;
+
+      & button {
+        display: flex;
+        padding: 1rem 2rem;
+        font-size: 2.5rem;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: 0.2s all;
+      }
+
+      &--delete {
+        color: red;
+        background-color: #ff8a8a;
+
+        &:hover {
+          color: #ff8a8a;
+          background-color: red;
+        }
+      }
+
+      &--edit {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+
+        &:hover {
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+        }
+      }
+    }
+
     &__image {
       width: 10rem;
       & img {

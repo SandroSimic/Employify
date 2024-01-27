@@ -18,7 +18,7 @@ const CompanyDropDown = ({ isOpenCompanyDropdown }) => {
           <Link>
             <button className="header__actions__username__dropdown__company__btn">
               <FaGear />
-              Company
+              Dashboard
             </button>
           </Link>
         </div>

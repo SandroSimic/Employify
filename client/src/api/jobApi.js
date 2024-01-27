@@ -4,7 +4,10 @@ import { BASE_URL } from "../utils/constants";
 const jobUrl = `${BASE_URL}/jobs`;
 
 export const getJobs = async (params) => {
-  const { data } = await axios.get(jobUrl, { withCredentials: true, params });
+  const { data } = await axios.get(`${jobUrl}?limit=9`, {
+    withCredentials: true,
+    params,
+  });
   return data;
 };
 
@@ -27,4 +30,19 @@ export const createJob = async (jobData) => {
   });
 
   return data;
+};
+
+export const deleteJob = async (jobId) => {
+  await axios.delete(`${jobUrl}/${jobId}`, {
+    withCredentials: true,
+  });
+};
+
+export const updateJob = async (jobData, jobId) => {
+  await axios.patch(`${jobUrl}/${jobId}`, jobData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
 };

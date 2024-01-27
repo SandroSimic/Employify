@@ -3,7 +3,7 @@ import { FaPaintBrush, FaChartLine, FaUserCheck } from "react-icons/fa";
 import { FaVolumeHigh, FaComputer, FaSchool } from "react-icons/fa6";
 import { MdAttachMoney, MdHealthAndSafety } from "react-icons/md";
 import { IoIosFitness } from "react-icons/io";
-import Heading from "../Heading";
+import Heading from "../UI/Heading";
 
 const Categories = () => {
   const [showAllCategories, setShowAllCategories] = useState(false);

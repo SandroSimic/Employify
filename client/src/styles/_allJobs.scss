@@ -3,13 +3,20 @@
   flex-direction: column;
   height: 100%;
 
-  &__heading, form {
+  &__error {
+    color: red;
+    font-size: 3rem;
+    height: 50vh;
+    text-align: center;
+    margin-top: 5rem;
+  }
+  &__heading,
+  form {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 3rem;
-    border-bottom: 2px solid var(--secondary-color);
     padding: 5rem;
     &__form {
       display: flex;
@@ -87,6 +94,10 @@
         gap: 1rem;
       }
     }
+  }
+
+  &__heading {
+    border-bottom: 2px solid var(--secondary-color);
   }
 
   &__main {

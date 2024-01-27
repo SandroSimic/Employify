@@ -17,8 +17,8 @@ const AllJobsHeading = ({
   setExperience,
   jobType,
   setJobType,
-  salary,
-  setSalaryType,
+  salaryType,  
+  setSalaryType, 
   category,
   setCategory
 }) => {
@@ -64,7 +64,7 @@ const AllJobsHeading = ({
             setExperience={setExperience}
           />
           <JobType jobType={jobType} setJobType={setJobType} />
-          <SalaryType salaryType={salary} setSalaryType={setSalaryType} />
+          <SalaryType salaryType={salaryType} setSalaryType={setSalaryType} />
           <Category category={category} setCategory={setCategory}/>
         </div>
       </form>
