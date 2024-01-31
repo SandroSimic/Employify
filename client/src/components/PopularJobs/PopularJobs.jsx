@@ -9,7 +9,7 @@ const PopularJobs = () => {
   const navigate = useNavigate();
   const { data: jobs, isLoading } = useTopJobs();
   const popularJobs = jobs?.topJobs;
-
+console.log(popularJobs)
   return (
     <section className="popularJobs">
       <Heading

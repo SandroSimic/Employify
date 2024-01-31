@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { BsClock } from "react-icons/bs";
 import { LuMapPin } from "react-icons/lu";
 import { CiCalendar } from "react-icons/ci";
@@ -15,33 +16,76 @@ import { formatCleanDate } from "../utils/calculateTime";
 import Modal from "../components/UI/Modal";
 import { useState } from "react";
 import { useDeleteJob } from "../components/Jobs/useDeleteJob";
+import { useApplyToJob } from "../components/Jobs/Applicants/useApplyToJob";
+import { useForm } from "react-hook-form";
 
 const JobDetailPage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isApplyModelOpen, setIsApplyModelOpen] = useState(false);
+  const [pdfFileName, setPdfFileName] = useState("");
+
   const { data: job, isLoading } = useJob();
   const { isLoading: isDeleting, deleteJobQuery } = useDeleteJob();
   const { data: user } = useLoggedInUser();
-  const isUserCompany = user?.companyId._id === job?.companyId._id;
+  const { applyToJobQuery, isLoading: isApplying } = useApplyToJob();
+  const { handleSubmit, register } = useForm();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isUserCompany = user?.companyId?._id === job?.companyId._id;
+  const userCreatedJob = user?._id === job?.companyId.owner;
+  const isApplied = job?.applicants?.some(
+    (applicant) => applicant?.user === user?._id
+  );
+
+  console.log(job)
+  console.log(user)
+  console.log(isApplied)
+
+  async function onSubmit(applicantData) {
+    const formData = new FormData();
+    formData.append("userCV", applicantData.userCV[0]);
+    formData.append("userMessage", applicantData.userMessage);
+
+    try {
+      await applyToJobQuery({ jobId: job?._id, applicantData: formData });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function onError(errors) {
+    console.log(errors);
+  }
+
   const openModal = () => {
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleChangeFile = (e) => {
+    if (e.target.files.length > 0) {
+      setPdfFileName(e.target.files[0].name);
+    }
+  };
+
+  const openModalApply = () => {
+    setIsApplyModelOpen(true);
+  };
+
+  const closeModalApply = () => {
+    setIsApplyModelOpen(false);
   };
 
   const deleteJob = () => {
     try {
       deleteJobQuery(job._id);
-    
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(isModalOpen);
   return (
     <>
       <section className="jobDetails">
@@ -88,7 +132,7 @@ const JobDetailPage = () => {
                     <h3>{job.location}</h3>
                   </div>
                   <p>
-                    Please send us you detailed CV to apply for this job post
+                    Please send us your detailed CV to apply for this job post
                   </p>
                 </div>
                 <div className="jobDetails__main__info__salary">
@@ -103,7 +147,9 @@ const JobDetailPage = () => {
                   />
                   <JobDetailBox
                     icon={<FaUsers />}
-                    jobType={job.applicants}
+                    jobType={
+                      job.applicants.length ? job.applicants.length : "0"
+                    }
                     jobTypeDesc={"Applicants"}
                   />
                   <JobDetailBox
@@ -116,9 +162,19 @@ const JobDetailPage = () => {
                     jobType={job.experience}
                     jobTypeDesc={"Experience"}
                   />
-                  <button className="jobDetails__main__info__condition__btn">
-                    Apply for this job
-                  </button>
+                  {!userCreatedJob ? (
+                    <button
+                      className={`jobDetails__main__info__condition__btn ${
+                        isApplied ? "disabled" : ""
+                      }`}
+                      onClick={user ? openModalApply : () => navigate("/login")}
+                      disabled={isApplied}
+                    >
+                      {isApplied
+                        ? "Already applied for this job"
+                        : "Apply for this job"}
+                    </button>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -143,6 +199,39 @@ const JobDetailPage = () => {
             Cancel
           </button>
         </div>
+      </Modal>
+
+      <Modal closeModal={isApplyModelOpen} setCloseModal={closeModalApply}>
+        <form
+          className="modal__form"
+          onSubmit={handleSubmit(onSubmit, onError)}
+        >
+          <div className="modal__apply">
+            <h3>Place your CV</h3>
+            <div className="modal__input">
+              <label htmlFor="file">
+                {pdfFileName ? pdfFileName : "Upload CV"}
+              </label>
+              <input
+                type="file"
+                id="file"
+                {...register("userCV")}
+                // onChange={handleChangeFile}
+              />
+            </div>
+          </div>
+          <div className="modal__message">
+            <textarea
+              className="modal__textarea"
+              placeholder="please enter your message"
+              {...register("userMessage")}
+            />
+          </div>
+
+          <div className="modal__actions">
+            <button className="modal__actions__btn__cancel">Apply</button>
+          </div>
+        </form>
       </Modal>
     </>
   );

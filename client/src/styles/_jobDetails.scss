@@ -4,6 +4,12 @@
   flex-direction: column;
   background-color: var(--secondary-color);
 
+  @media only screen and (max-width: $bp-medium) {
+    padding: 0;
+    display: block;
+    overflow-x: hidden;
+  }
+
   &__wrapper {
     background-color: var(--color-white);
     padding: 3rem;
@@ -19,6 +25,10 @@
     &__info {
       display: flex;
       justify-content: space-between;
+
+      @media only screen and (max-width: $bp-medium) {
+        flex-direction: column-reverse;
+      }
     }
 
     &__actions {
@@ -96,10 +106,15 @@
     display: flex;
     justify-content: space-between;
     gap: 5rem;
+
     &__desc {
       display: flex;
       font-size: 1.6rem;
       width: 60%;
+      @media only screen and (max-width: $bp-medium) {
+        width: 85%;
+      }
+
       &__box {
         display: flex;
       }
@@ -113,6 +128,7 @@
       border-radius: 1rem;
       padding: 3rem;
       align-self: baseline;
+
       &__location {
         & div {
           display: flex;
@@ -124,6 +140,11 @@
         & p {
           margin: 1rem 0rem;
           font-size: 1.3rem;
+
+          @media only screen and (max-width: $bp-medium) {
+            font-size: 1rem;
+            margin: 0.5rem 0rem;
+          }
         }
       }
 
@@ -181,5 +202,21 @@
         }
       }
     }
+
+    @media only screen and (max-width: $bp-medium) {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: not-allowed;
   }
 }

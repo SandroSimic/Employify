@@ -44,7 +44,7 @@ const JobsCard = ({ data }) => {
         <Link to={`/job/${_id}`}>
           <button>Apply Now</button>
         </Link>
-        <p>{applicants} Applied</p>
+        <p>{!applicants ? "0" : applicants.length} Applied</p>
       </div>
     </div>
   );

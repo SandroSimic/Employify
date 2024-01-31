@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
 import AddJobPage from "./pages/AddJobPage";
 import UpdateJobPage from "./pages/UpdateJobPage";
+import CompanyDashboard from "./pages/CompanyDashboard";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,9 +38,14 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/company/dashboard" element={<CompanyDashboard />} />
         </Routes>
       </Router>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} toastOptions={{
+        style: {
+          fontSize: "1.7rem"
+        }
+      }}/>
     </QueryClientProvider>
   );
 }

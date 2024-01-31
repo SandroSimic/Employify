@@ -3,6 +3,7 @@ import AppError from "./appError.js";
 import sharp from "sharp";
 
 const storage = multer.memoryStorage();
+const pdfStorage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.split("/")[0] === "image") {
@@ -35,3 +36,17 @@ export const compressImage = (req, res, next) => {
       next(err);
     });
 };
+
+const pdfFileFilter = (req, file, cb) => {
+  if (file.mimetype === "application/pdf") {
+    cb(null, true);
+  } else {
+    cb(new AppError("File is not PDF", 400), false);
+  }
+};
+
+export const uploadPdf = multer({
+  storage: pdfStorage,
+  fileFilter: pdfFileFilter,
+  limits: { fileSize: 5000000 },
+});

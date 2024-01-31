@@ -68,15 +68,7 @@ const getJobs = catchAsync(async (req, res, next) => {
       path: "companyId",
       select: "-jobs",
     })
-    .populate({
-      path: "applicants",
-      populate: {
-        path: "user",
-        model: "User",
-        select: "username email image userImage",
-      },
-      select: "-job",
-    });
+    .populate("applicants");
 
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 100;
@@ -106,7 +98,7 @@ const getJobs = catchAsync(async (req, res, next) => {
 
 const getJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const job = await Job.findById(id).populate("companyId");
+  const job = await Job.findById(id).populate("companyId").populate("applicants");
 
   if (!job) {
     return next(new AppError("No jobs found with that ID", 404));

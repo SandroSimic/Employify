@@ -17,6 +17,10 @@ const applicantSchema = new mongoose.Schema({
     type: String,
     required: [true, "Message is required"],
   },
+  isApplied: {
+    type: Boolean,
+    default: false,
+  },
 });
 const Applicant = mongoose.model("Applicant", applicantSchema);
-export default Applicant
+export default Applicant;

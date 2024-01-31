@@ -10,6 +10,10 @@ const Header = () => {
   const [isOpenCompanyDropdown, setIsOpenCompanyDropdown] = useState(false);
   const { data, error, isLoading } = useLoggedInUser();
 
+  const handleNavClick = () => {
+    setIsOpenNav(false);
+  };
+
   return (
     <header className="header">
       <h1 className="header__logo">
@@ -17,11 +21,14 @@ const Header = () => {
       </h1>
       <nav className={`header__navigation ${isOpenNav && "responsive"}`}>
         <ul className={`header__navigation__list ${isOpenNav && "show"}`}>
-          <Link to={"/all-jobs"}>
+          <Link to={"/"} onClick={handleNavClick}>
+            <li>Home</li>
+          </Link>
+          <Link to={"/all-jobs"} onClick={handleNavClick}>
             <li>Jobs</li>
           </Link>
-          <li>Companies</li>
-          <li>Talent</li>
+          <li onClick={handleNavClick}>Companies</li>
+          <li onClick={handleNavClick}>Talent</li>
         </ul>
       </nav>
       <UserActions

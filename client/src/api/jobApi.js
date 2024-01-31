@@ -46,3 +46,13 @@ export const updateJob = async (jobData, jobId) => {
     withCredentials: true,
   });
 };
+
+export const applyToJob = async (jobId, applicantData) => {
+  console.log(applicantData, jobId);
+  await axios.patch(`${jobUrl}/apply/${jobId}`, applicantData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,
+  });
+};
