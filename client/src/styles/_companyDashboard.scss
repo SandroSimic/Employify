@@ -3,6 +3,19 @@
   height: 100vh;
   padding: 5rem;
 
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
+    border-radius: 3rem;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
   &__exit {
     display: flex;
     font-size: 3rem;
@@ -52,12 +65,18 @@
 
   &__main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 10rem;
     border-radius: 0rem 3rem 3rem 0rem;
-    background-color: var(--primary-color-light);
+    background-color: var(--secondary-color);
     width: 100%;
     padding: 3rem;
+
+    &__info {
+      display: flex;
+      gap: 10rem;
+    }
   }
   &__box {
     display: flex;

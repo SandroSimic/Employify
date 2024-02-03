@@ -1,46 +1,31 @@
 import React from "react";
-import { FaHome, FaUsers } from "react-icons/fa";
+import { useLoggedInUser } from "../components/Auth/useLoggedInUser";
+import { useGetApplicantsForCompany } from "../components/Jobs/Applicants/useGetApplicantsForCompany";
+import { useGetCompany } from "../components/Company/useGetCompany";
+import CompanyDashboardSidebar from "../components/Company/Dashboard/CompanyDashboardSidebar";
+import { FaUsers } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
-import { IoExit } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import CompanyDashboardMain from "../components/Company/Dashboard/CompanyDashboardMain";
 const CompanyDashboard = () => {
+  const { data } = useGetApplicantsForCompany();
+  const { data: user } = useLoggedInUser();
+  const companyId = user?.companyId?._id;
+  const {
+    data: companyData,
+    error: companyError,
+    isLoading: companyIsLoading,
+    refetch: refetchCompany,
+  } = useGetCompany(companyId);
+
+  console.log(companyData);
   return (
     <section className="companyDashboard">
-      <nav className="companyDashboard__navbar">
-        <ul>
-          <li>
-            <FaHome />
-            <p>Home</p>
-          </li>
-          <li>
-            <FaUsers />
-            <p>Applicants</p>
-          </li>
-          <li>
-            <MdWork />
-            <p>Jobs</p>
-          </li>
-        </ul>
-        <Link to={'/'} className="companyDashboard__exit">
-          <IoExit />
-          <p>Exit</p>
-        </Link>
-      </nav>
-      <div className="companyDashboard__main">
-        <div className="companyDashboard__box">
-          <div className="companyDashboard__box__icon">
-            <FaUsers />
-          </div>
-          <h1>Applicants</h1>
-          <p>Total Applicants: 123</p>
-        </div>
-        <div className="companyDashboard__box">
-          <div className="companyDashboard__box__icon">
-            <MdWork />
-          </div>
-          <h1>Jobs</h1>
-          <p>Total Applicants: 123</p>
-        </div>
+      <div className="companyDashboard__wrapper">
+        <CompanyDashboardSidebar />
+        <CompanyDashboardMain
+          applicants={data?.applicants}
+          jobs={companyData?.jobs}
+        />
       </div>
     </section>
   );

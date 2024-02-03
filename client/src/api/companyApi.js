@@ -13,3 +13,11 @@ export const createCompany = async (companyData) => {
 
   return data;
 };
+
+export const getUsersCompany = async (companyId) => {
+  const { data } = await axios.get(`${companyApi}/${companyId}`, {
+    withCredentials: true,
+  });
+
+  return data;
+};
