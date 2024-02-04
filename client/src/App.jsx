@@ -12,6 +12,9 @@ import CreateCompanyPage from "./pages/CreateCompanyPage";
 import AddJobPage from "./pages/AddJobPage";
 import UpdateJobPage from "./pages/UpdateJobPage";
 import CompanyDashboard from "./pages/CompanyDashboard";
+import CompanyDashboardApplicants from "./components/Company/Dashboard/CompanyDashboardApplicants";
+import CompanyDashboardLayout from "./layout/CompanyDashboardLayout";
+import CompanyDashboardJobs from "./components/Company/Dashboard/CompanyDashboardJobs";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,14 +41,29 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/company/dashboard" element={<CompanyDashboard />} />
+
+          <Route path="/company/dashboard" element={<CompanyDashboardLayout />}>
+            <Route index element={<CompanyDashboard />} />
+            <Route
+              path="/company/dashboard/applicants"
+              element={<CompanyDashboardApplicants />}
+            />
+            <Route
+              path="/company/dashboard/jobs"
+              element={<CompanyDashboardJobs />}
+            />
+          </Route>
         </Routes>
       </Router>
-      <Toaster position="top-center" reverseOrder={false} toastOptions={{
-        style: {
-          fontSize: "1.7rem"
-        }
-      }}/>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            fontSize: "1.7rem",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

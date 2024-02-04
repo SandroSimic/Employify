@@ -8,16 +8,22 @@ const CompanyDashboardSidebar = () => {
     <nav className="companyDashboard__navbar">
       <ul>
         <li>
-          <FaHome />
-          <p>Home</p>
+          <Link to={"/company/dashboard"}>
+            <FaHome />
+            <p>Home</p>
+          </Link>
         </li>
         <li>
-          <FaUsers />
-          <p>Applicants</p>
+          <Link to={"/company/dashboard/applicants"}>
+            <FaUsers />
+            <p>Applicants</p>
+          </Link>
         </li>
         <li>
-          <MdWork />
-          <p>Jobs</p>
+          <Link to={"/company/dashboard/jobs"}>
+            <MdWork />
+            <p>Jobs</p>
+          </Link>
         </li>
       </ul>
       <Link to={"/"} className="companyDashboard__exit">

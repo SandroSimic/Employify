@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import { FaUsers } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import {
@@ -15,25 +14,22 @@ import {
 import { DateTime } from "luxon";
 
 const CompanyDashboardMain = ({ applicants, jobs }) => {
-  console.log(applicants)
-  console.log(jobs)
   const data = Array.from({ length: 6 }, (_, i) => {
     const startOfMonth = DateTime.now().minus({ months: i }).startOf("month");
     const endOfMonth = DateTime.now().minus({ months: i }).endOf("month");
-  
+
     return {
       name: startOfMonth.toFormat("MMMM yyyy"),
-      applicants: applicants?.filter(applicant => {
+      applicants: applicants?.filter((applicant) => {
         const applicationDate = DateTime.fromISO(applicant.createdAt);
         return applicationDate >= startOfMonth && applicationDate <= endOfMonth;
       }).length,
-      jobs: jobs?.filter(job => {
+      jobs: jobs?.filter((job) => {
         const jobDate = DateTime.fromISO(job.createdAt);
         return jobDate >= startOfMonth && jobDate <= endOfMonth;
       }).length,
     };
   }).reverse();
-  
 
   return (
     <div className="companyDashboard__main">

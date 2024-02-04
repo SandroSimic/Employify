@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.17.12",
     "@tanstack/react-query-devtools": "^5.17.12",
+    "ag-grid-react": "^31.0.3",
     "axios": "^1.6.5",
     "luxon": "^3.4.4",
     "moment": "^2.30.1",
