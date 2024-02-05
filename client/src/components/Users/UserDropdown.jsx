@@ -20,20 +20,6 @@ const UserDropdown = ({ isOpenUserDropdown }) => {
         <div className="header__actions__username__dropdown">
           <button
             className="header__actions__username__dropdown__btn"
-            disabled={isLoading}
-          >
-            <FaUser />
-            Profile
-          </button>
-          <button
-            className="header__actions__username__dropdown__btn"
-            disabled={isLoading}
-          >
-            <FaGear />
-            Settings
-          </button>
-          <button
-            className="header__actions__username__dropdown__btn"
             onClick={handleLogout}
             disabled={isLoading}
           >

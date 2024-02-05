@@ -14,6 +14,7 @@ export function useUpdateJob() {
       navigate("/");
     },
     onError: (err) => {
+      toast.error(err.response.data.message)
       console.log(err.response.data.message);
       console.log(err);
     },

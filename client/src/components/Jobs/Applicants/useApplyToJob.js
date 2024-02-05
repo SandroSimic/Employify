@@ -15,8 +15,6 @@ export function useApplyToJob() {
       navigate("/");
     },
     onError: (err) => {
-      console.log(err.response.data.message);
-      console.log(err);
       toast.error(err.response.data.message)
     },
   });

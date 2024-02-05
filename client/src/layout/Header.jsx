@@ -27,7 +27,6 @@ const Header = () => {
           <Link to={"/all-jobs"} onClick={handleNavClick}>
             <li>Jobs</li>
           </Link>
-          <li onClick={handleNavClick}>Companies</li>
         </ul>
       </nav>
       <UserActions

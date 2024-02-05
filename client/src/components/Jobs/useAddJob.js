@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { createJob } from "../../api/jobApi";
+import toast from "react-hot-toast";
 
 export function useAddJob() {
   const queryClient = useQueryClient();
@@ -13,6 +14,7 @@ export function useAddJob() {
       navigate("/");
     },
     onError: (err) => {
+      toast.error(err.response.data.message)
       console.log(err.response.data.message);
       console.log(err);
     },
