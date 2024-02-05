@@ -28,7 +28,6 @@ const Header = () => {
             <li>Jobs</li>
           </Link>
           <li onClick={handleNavClick}>Companies</li>
-          <li onClick={handleNavClick}>Talent</li>
         </ul>
       </nav>
       <UserActions

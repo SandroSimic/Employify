@@ -4,7 +4,6 @@ import { useGetApplicantsForCompany } from "../components/Jobs/Applicants/useGet
 import { useGetCompany } from "../components/Company/useGetCompany";
 import CompanyDashboardMain from "../components/Company/Dashboard/CompanyDashboardMain";
 import Spinner from "../components/UI/Spinner";
-import CompanyDashboardLayout from "../layout/CompanyDashboardLayout";
 
 const CompanyDashboard = () => {
   const { data } = useGetApplicantsForCompany();
@@ -18,10 +17,10 @@ const CompanyDashboard = () => {
   }
 
   return (
-      <CompanyDashboardMain
-        applicants={data?.applicants}
-        jobs={companyData?.jobs}
-      />
+    <CompanyDashboardMain
+      applicants={data?.applicants}
+      jobs={companyData?.jobs}
+    />
   );
 };
 

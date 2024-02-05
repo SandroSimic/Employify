@@ -23,7 +23,7 @@ const createCompany = catchAsync(async (req, res, next) => {
   }
 
   const data = await s3Upload(req.file);
-  console.log(data)
+  console.log(data);
   const newCompany = await Company.create({
     companyName,
     companyDescription,

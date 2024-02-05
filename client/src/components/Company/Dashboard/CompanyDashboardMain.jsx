@@ -14,9 +14,10 @@ import {
 import { DateTime } from "luxon";
 
 const CompanyDashboardMain = ({ applicants, jobs }) => {
-  const data = Array.from({ length: 6 }, (_, i) => {
-    const startOfMonth = DateTime.now().minus({ months: i }).startOf("month");
-    const endOfMonth = DateTime.now().minus({ months: i }).endOf("month");
+  const data = Array.from({ length: 12 }, (_, i) => {
+    const monthIndex = 11 - i; 
+    const startOfMonth = DateTime.local(2024, monthIndex + 1, 1).startOf("month");
+    const endOfMonth = DateTime.local(2024, monthIndex + 1, 1).endOf("month");
 
     return {
       name: startOfMonth.toFormat("MMMM yyyy"),
@@ -30,6 +31,7 @@ const CompanyDashboardMain = ({ applicants, jobs }) => {
       }).length,
     };
   }).reverse();
+
 
   return (
     <div className="companyDashboard__main">

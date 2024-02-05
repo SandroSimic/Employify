@@ -21,3 +21,9 @@ export const getApplicantsForCompany = async () => {
 
   return data;
 };
+
+export const deleteApplicant = async (applicantId) => {
+  await axios.delete(`${applicantUrl}/${applicantId}`, {
+    withCredentials: true,
+  });
+};

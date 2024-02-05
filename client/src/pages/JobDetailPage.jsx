@@ -37,10 +37,6 @@ const JobDetailPage = () => {
     (applicant) => applicant?.user === user?._id
   );
 
-  console.log(job)
-  console.log(user)
-  console.log(isApplied)
-
   async function onSubmit(applicantData) {
     const formData = new FormData();
     formData.append("userCV", applicantData.userCV[0]);

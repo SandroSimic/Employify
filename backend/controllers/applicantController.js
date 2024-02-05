@@ -67,7 +67,6 @@ const getApplicants = catchAsync(async (req, res, next) => {
 });
 
 const getApplicantsForJob = catchAsync(async (req, res, next) => {
-  console.log(req.user);
   const companyId = req.user.companyId;
 
   if (!companyId) {
@@ -87,4 +86,37 @@ const getApplicantsForJob = catchAsync(async (req, res, next) => {
   res.status(200).json({ applicants });
 });
 
-export { applyToJob, getApplicants, getApplicantsForJob };
+const deleteApplicant = catchAsync(async (req, res, next) => {
+  const { applicantId } = req.params;
+
+  const applicant = await Applicant.findById(applicantId);
+
+  if (!applicant) {
+    return next(new AppError("No applicant found with that id", 404));
+  }
+
+  const jobId = applicant.job;
+  console.log(jobId);
+
+  const job = await Job.findByIdAndUpdate(
+    jobId,
+    {
+      $pull: { applicants: applicantId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  if (!job) {
+    return next(new AppError("Job was not found", 404));
+  }
+
+  await Applicant.findByIdAndDelete(applicantId);
+
+  res.status(204).json({
+    message: "Applicant Deleted Successfully",
+  });
+});
+
+export { applyToJob, getApplicants, getApplicantsForJob, deleteApplicant };

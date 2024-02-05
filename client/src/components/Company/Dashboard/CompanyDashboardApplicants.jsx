@@ -5,12 +5,42 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import Modal from "../../UI/Modal";
 import { useGetApplicantsForCompany } from "../../Jobs/Applicants/useGetApplicantsForCompany";
+import { useDeleteApplicant } from "../../Jobs/Applicants/useDeleteApplicant";
 
 const CompanyDashboardApplicants = () => {
-  const { data } = useGetApplicantsForCompany();
   const [rowData, setRowData] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data } = useGetApplicantsForCompany();
+  const { deleteApplicantQuery } = useDeleteApplicant();
+
+  const DeleteCellRendered = (props) => {
+    const handleDeleteClick = async () => {
+      console.log("Deleted" + props.data.id);
+
+      try {
+        await deleteApplicantQuery(props.data.id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    return (
+      <button
+        style={{
+          backgroundColor: "red",
+          padding: ".5rem",
+          cursor: "pointer",
+          border: "none",
+          color: "white",
+        }}
+        onClick={handleDeleteClick}
+      >
+        Delete Applicant
+      </button>
+    );
+  };
 
   const MessageCellRenderer = (props) => {
     const handleViewMessageClick = () => {
@@ -66,6 +96,7 @@ const CompanyDashboardApplicants = () => {
         "Applied Job": applicant.job.position,
         Message: applicant.userMessage,
         CV: applicant.userCV,
+        id: applicant._id,
       }));
 
       setRowData(formattedData);
@@ -85,6 +116,11 @@ const CompanyDashboardApplicants = () => {
       headerName: "CV",
       field: "CV",
       cellRenderer: ColorCellRenderer,
+    },
+    {
+      headerName: "Delete",
+      field: "id",
+      cellRenderer: DeleteCellRendered,
     },
   ];
 
