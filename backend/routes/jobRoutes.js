@@ -26,7 +26,7 @@ router
 router
   .route("/:id")
   .get(getJobById)
-  .patch(protect, restrictTo("employer", "admin"), updateJob)
-  .delete(protect, restrictTo("employer", "admin"), deleteJob);
+  .patch(protect, restrictTo("employer"), updateJob)
+  .delete(protect, restrictTo("employer"), deleteJob);
 
 export default router;
